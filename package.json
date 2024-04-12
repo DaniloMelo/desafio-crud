@@ -1,15 +1,10 @@
 {
   "scripts": {
-    "create": "node ./src/create.js",
-    "create:watch": "node --watch ./src/create.js",
-    "read": "node ./src/read.js",
-    "read:watch": "node --watch ./src/read.js",
-    "update": "node ./src/update.js",
-    "update:watch": "node --watch ./src/update.js",
-    "delete": "node ./src/delete.js",
-    "delete:watch": "node --watch ./src/delete.js",
-    "test": "jest",
-    "test:watch": "jest --watchAll ./src"
+    "create": "node --watch ./src/create.js",
+    "read": "node --watch ./src/read.js",
+    "update": "node --watch ./src/update.js",
+    "delete": "node --watch ./src/delete.js",
+    "test": "jest --watchAll ./src"
   },
   "dependencies": {
     "jest": "^29.7.0"
