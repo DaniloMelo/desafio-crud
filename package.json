@@ -4,10 +4,14 @@
     "read": "node --watch ./src/read.js",
     "update": "node --watch ./src/update.js",
     "delete": "node --watch ./src/delete.js",
-    "test": "jest --watchAll ./src"
+    "test": "jest --watchAll ./src",
+    "dev": "node --watch --env-file=.env ./src/server.js"
   },
   "dependencies": {
-    "jest": "^29.7.0"
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "jest": "^29.7.0",
+    "mysql2": "^3.9.7"
   },
   "type": "module",
   "devDependencies": {
