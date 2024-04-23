@@ -1,5 +1,4 @@
-import execQuery from "./execQuery.js";
-import teste from "../services/service.js";
+// import execQuery from "./execQuery.js";
 import getAllusers from "../services/getAllusers.js"
 
 // export default async function read({ }) {

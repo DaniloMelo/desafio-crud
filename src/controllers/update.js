@@ -1,7 +1,6 @@
 import execQuery from "./execQuery.js";
 import read from "./read.js";
 
-import teste from "../services/service.js";
 
 export default async function update(id, { }) {
   // TODO: Implementar query

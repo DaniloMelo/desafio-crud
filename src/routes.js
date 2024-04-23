@@ -6,6 +6,8 @@ import deleteOp from "./controllers/delete.js"
 
 const router = express.Router()
 
-router.get("/", read)
+router.get("/users", read)
+router.post("/users", create)
+
 
 export default router
