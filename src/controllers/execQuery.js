@@ -18,35 +18,6 @@ pool.on("error", (error) => {
   console.log(`Database error: ${error}`);
 })
 
-// export default async function execQuery1(query = "", values = null) {
-//   return new Promise((resolve, reject) => {
-//     if (values === null) {
-//       pool.query(query, (error, results) => {
-//         if (error) {
-//           reject(error)
-//         } else {
-//           resolve(results)
-//         }
-
-//       })
-//     } else {
-//       pool.query(
-//         query,
-//         [...values],
-//         (error, results) => {
-//           if (error) {
-//             reject(error)
-//           } else {
-//             resolve(results)
-//           }
-
-//         }
-//       )
-//     }
-//   });
-// }
-
-
 export default async function execQuery(query = "", values = null) {
   return new Promise((resolve, reject) => {
     if (values === null) {

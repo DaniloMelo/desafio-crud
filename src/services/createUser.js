@@ -5,7 +5,7 @@ export default async function createUser(userName, userEmail) {
     try {
       const data = execQuery("INSERT INTO users (userName, userEmail) VALUES (?, ?)", [userName, userEmail])
 
-      if (!data) {
+      if (data.error) {
         reject(data)
       }
 
