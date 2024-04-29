@@ -1,35 +1,12 @@
 import execQuery from "../controllers/execQuery.js"
 
-// export default async function getUserById(id) {
-//   return new Promise((resolve, reject) => {
-//     try {
-//       const data = execQuery("SELECT * FROM users WHERE ID = ?", [id])
-
-//       if (data.error) {
-//         reject(data)
-//       }
-
-//       resolve(data)
-//     } catch (error) {
-//       console.error(`Error when fetching data: ${error}`)
-//       throw new Error("Error when fetching data.")
-//     }
-//   })
-// }
-
-
-export default async function getUsersById(id) {
+export default async function getUserById(id) {
   try {
-    const data = await execQuery("SELECT * FROM users WHERE ID = ?", [id])
-
-    if (data.length === 0) {
-      throw new Error("User not found")
-    }
-
-    return data[0]
+    const query = "SELECT * FROM users WHERE ID = ?"
+    const data = await execQuery(query, [id])
+    return data
 
   } catch (error) {
-    console.error(`Error when fetching data - ${error}`)
-    throw new Error("Error when fetching data.")
+    throw error
   }
 }

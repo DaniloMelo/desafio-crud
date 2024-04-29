@@ -1,18 +1,12 @@
 import execQuery from "../controllers/execQuery.js";
 
 export default async function createUser(userName, userEmail) {
-  return new Promise((resolve, reject) => {
-    try {
-      const data = execQuery("INSERT INTO users (userName, userEmail) VALUES (?, ?)", [userName, userEmail])
+  try {
+    const query = "INSERT INTO users (userName, userEmail) VALUES (?, ?)"
+    const data = await execQuery(query, [userName, userEmail])
+    return data
 
-      if (data.error) {
-        reject(data)
-      }
-
-      resolve(data)
-    } catch (error) {
-      console.error(`Error creating user: ${error}`)
-      throw new Error("Error creating user")
-    }
-  })
+  } catch (error) {
+    throw error
+  }
 }

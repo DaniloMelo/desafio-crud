@@ -1,4 +1,4 @@
-import mysql from "mysql2"
+import mysql from "mysql2/promise"
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
@@ -18,22 +18,37 @@ pool.on("error", (error) => {
   console.log(`Database error: ${error}`);
 })
 
+// export default async function execQuery(query = "", values = null) {
+//   return new Promise((resolve, reject) => {
+//     if (values === null) {
+//       pool.query(query, (error, results) => {
+//         if (error) {
+//           reject(error)
+//         }
+//         resolve(results)
+//       })
+//     } else {
+//       pool.query(query, [...values], (error, results) => {
+//         if (error) {
+//           reject(error)
+//         }
+//         resolve(results)
+//       })
+//     }
+//   })
+// }
+
 export default async function execQuery(query = "", values = null) {
-  return new Promise((resolve, reject) => {
+  try {
     if (values === null) {
-      pool.query(query, (error, results) => {
-        if (error) {
-          reject(error)
-        }
-        resolve(results)
-      })
+      const data = await pool.query(query)
+      return data
     } else {
-      pool.query(query, [...values], (error, results) => {
-        if (error) {
-          reject(error)
-        }
-        resolve(results)
-      })
+      const data = await pool.query(query, [...values])
+      return data
     }
-  })
+  } catch (error) {
+    console.error(`Error when fetching data. ${error.message}`)
+    throw error
+  }
 }

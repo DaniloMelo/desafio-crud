@@ -2,25 +2,23 @@ import getUserById from "../services/getUserById.js";
 
 export default async function readById(request, response) {
   try {
-    const id = request.params.id;
-    if (!id || isNaN(id)) {
-      response.status(400).json({ error: "User ID not provided or incorrect." })
-    }
+    const { id } = request.params
 
-    const data = await getUserById(id)
+    const [result] = await getUserById(id)
+
+    if (!result || result.length === 0) {
+      return response.status(404).json({ error: "User not found." })
+    }
 
     const responseData = {
-      error: null,
-      result: {
-        id: data.id,
-        userName: data.userName,
-        userEmail: data.userEmail
-      }
+      message: "User search completed successfully.",
+      data: result
     }
 
-    response.json(responseData)
+    response.status(200).json(responseData)
+
   } catch (error) {
     console.error(`Error when fetching data: ${error}`)
-    response.status(500).json({ error: error.message || "Internal Server Error." })
+    return response.status(500).json({ error: error.message || "Internal Server Error." })
   }
 }

@@ -1,5 +1,4 @@
 // import execQuery from "./execQuery.js";
-import createUser from "../services/createUser.js";
 
 // export default async function create({ }) {
 //   // TODO: Implementar query
@@ -10,6 +9,8 @@ import createUser from "../services/createUser.js";
 //   return result;
 // }
 
+import createUser from "../services/createUser.js";
+
 export default async function create(request, response) {
   try {
     const userName = request.body.userName;
@@ -19,25 +20,24 @@ export default async function create(request, response) {
       return response.status(400).json({ error: "User or email not provided." })
     }
 
-    const newUser = createUser(userName, userEmail)
+    const [newUser] = await createUser(userName, userEmail)
 
     const responseData = {
-      error: null,
+      message: "User created successfully.",
       result: {
-        id: newUser.id,
-        userName: newUser.userName,
-        userEmail: newUser.userEmail
+        id: newUser.insertId,
+        userName,
+        userEmail
       }
     }
 
     response.status(201).json({
-      success: true,
       message: "User Created Successfully.",
       data: responseData
     })
 
   } catch {
     console.error(`Error creating user: ${error}`)
-    response.status(500).json({ error: error.message || "Internal Server Error." })
+    return response.status(500).json({ error: error.message || "Internal Server Error." })
   }
 }
